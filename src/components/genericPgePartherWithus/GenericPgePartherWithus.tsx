@@ -83,35 +83,21 @@
 
 import React, { useState, useEffect } from 'react';
 import "./genericPgePartherWithus.scss"
+import apiUrl from "../../config/strApiUrl";
+import { ApiData, CardData } from "./GenericPgePartherWithus.d"
 
-interface ApiData {
-    heading: string;
-    subHeading: string;
-    description: string;
-}
-
-interface CardData {
-    id: number;
-    attributes: {
-        heading: string;
-        description: string;
-        buttonName: string;
-        buttonLink: string;
-        image: {
-            data: {
-                url: string;
-            }
-        }
-    }
-}
 
 const GenericPgePartherWithus: React.FC = () => {
     const [apiData, setApiData] = useState<ApiData | null>(null);
     const [apiCards, setApiCards] = useState<CardData[]>([]);
     const [showAll, setShowAll] = useState<boolean>(false);
+    // const response = await axios.get<AboutResponse>(
+    //     `${apiUrl}/api/abouts`
+    //   );
 
     useEffect(() => {
-        fetch('https://377a-119-73-112-80.ngrok-free.app/api/generic-solutions')
+        // fetch('https://d4d7-119-73-112-193.ngrok-free.app/api/generic-solutions')
+        fetch(`${apiUrl}/api/generic-solutions`)
             .then(response => response.json())
             .then(data => {
                 setApiData(data.data[0].attributes);
@@ -120,7 +106,8 @@ const GenericPgePartherWithus: React.FC = () => {
                 console.error('Error fetching data:', error);
             });
 
-        fetch('https://377a-119-73-112-80.ngrok-free.app/api/generic-solution-cards?populate=*')
+        // fetch('https://d4d7-119-73-112-193.ngrok-free.app/api/generic-solution-cards?populate=*')
+        fetch(`${apiUrl}/api/generic-solution-cards?populate=*`)
             .then(response => response.json())
             .then(data => {
                 setApiCards(data.data);
@@ -129,6 +116,9 @@ const GenericPgePartherWithus: React.FC = () => {
                 console.error('Error fetching data:', error);
             });
     }, []);
+    useEffect(() => {
+        console.log('API Cards:', apiCards);
+    }, [apiCards]);
 
     const handleViewAll = () => {
         setShowAll(true);
@@ -168,3 +158,5 @@ const GenericPgePartherWithus: React.FC = () => {
 }
 
 export default GenericPgePartherWithus;
+
+

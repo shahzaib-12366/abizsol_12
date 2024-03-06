@@ -100,32 +100,18 @@
 import React, { useState, useEffect } from 'react';
 import "./genericpgeInFoucs.scss";
 import Rectangle5591 from "../../assets/Rectangle 5591.png";
-
-interface FocusData {
-    heading: string;
-    subHeading: string;
-    description: string;
-}
-
-interface CardData {
-    id: number;
-    attributes: {
-        heading: string;
-        description: string;
-        image: {
-            data: {
-                url: string;
-            };
-        };
-    };
-}
+import apiUrl from "../../config/strApiUrl";
+import { FocusData, CardData } from "./GenericpgeInFoucs.d"
 
 const GenericpgeInFoucs = () => {
     const [cardsData, setCardsData] = useState<CardData[]>([]);
     const [focusData, setFocusData] = useState<FocusData | null>(null);
 
     useEffect(() => {
-        fetch('https://377a-119-73-112-80.ngrok-free.app/api/generic-focus')
+        // fetch('https://d4d7-119-73-112-193.ngrok-free.app/api/generic-focus')
+        fetch(`${apiUrl}/api/generic-focus`)
+
+
             .then(response => response.json())
             .then(data => {
                 setFocusData(data.data.attributes);
@@ -136,7 +122,8 @@ const GenericpgeInFoucs = () => {
     }, []);
 
     useEffect(() => {
-        fetch('https://377a-119-73-112-80.ngrok-free.app/api/generic-focus-cards?populate=*')
+        fetch(`${apiUrl}/api/generic-focus-cards?populate=*`)
+
             .then(response => response.json())
             .then(data => {
                 setCardsData(data.data);

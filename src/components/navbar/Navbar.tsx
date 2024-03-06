@@ -12,8 +12,12 @@ interface NavItem extends NavbarData {
   isDropdownVisible: boolean;
 }
 
+interface NavbarProps {
+  logoUrl?: string;
+}
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC<NavbarProps> = ({ logoUrl }) => {
+  console.log(`${apiUrl}${logoUrl}`)
   const [navItems, setNavItems] = useState<any[]>([]);
   const token = "e01e9ec2eadcee5ddd5adea1b83c78dbab5c1a0358948596fb3222a7f4509c3ebe5b100f5ebae40bfc35cb741148b79976999c7e56953986327c88ae88ed76e3cc014762bd47aa002fdd1a46de4bfba697133db57e1a343042b372c2dec7cbde8a0606a74da0ab4a1c4111d0ebdfde33e06250ea2579ba3967792c06a998f7d1";
   const [hoveredItem, setHoveredItem] = useState<any>(null);
@@ -24,7 +28,7 @@ const Navbar: React.FC = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://377a-119-73-112-80.ngrok-free.app/api/navigations?populate=*", {
+          "https://d4d7-119-73-112-193.ngrok-free.app/api/navigations?populate=*", {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -70,6 +74,7 @@ const Navbar: React.FC = () => {
   };
 
   const handleDropdownItemHover = (dropdownItem: any) => {
+    console.log(dropdownItem.attributes.dropdownName)
     if (hoveredItem !== dropdownItem) {
       setPrevHoveredItem(hoveredItem);
       setHoveredItem(dropdownItem);
@@ -80,8 +85,11 @@ const Navbar: React.FC = () => {
   return (
     <>
       <nav className="navbar">
+        {/* <div className="navbar-left">
+          {logoUrl && <img src={logoUrl} alt="ghjhfgjhkh" className="logo" />} 
+        </div> */}
         <div className="navbar-left">
-          <img src={abizSol} alt="Logo" className="logo" />
+          <img src={`${apiUrl}+${logoUrl}`} alt="Logo" className="logo" />
         </div>
         <div className="navbar-center">
           <ul className="nav-links">

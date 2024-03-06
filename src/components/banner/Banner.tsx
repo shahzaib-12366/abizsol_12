@@ -3,15 +3,8 @@ import axios from "axios";
 import "./Banner.css";
 import banner from "../../assets/banner.png";
 import apiUrl from "../../config/strApiUrl";
+import { BannerData } from "./Banner.d"
 
-interface BannerData {
-  heading: string;
-  subHeading: string;
-  description: string;
-  image: {
-    url: string;
-  };
-}
 
 const Banner: React.FC = () => {
   const [bannerData, setBannerData] = useState<BannerData | null>(null);
@@ -57,7 +50,7 @@ const Banner: React.FC = () => {
           </div>
 
 
-          
+
         </>
       )}
     </div>

@@ -7,7 +7,7 @@ const ContactUs = () => {
     return (
         <>
 
-            <Header />
+            {/* <Header /> */}
             <Navbar />
             {/* <ContactUsBannar/> */}
 

@@ -9,22 +9,9 @@ import Rectangle5545 from "../../assets/Rectangle 5545.png";
 import Rectangle5546 from "../../assets/Rectangle 5546.png";
 import "./LogoRow.css";
 import apiUrl from "../../config/strApiUrl";
+import { AboutData, AboutResponse } from "./LogoRow.d"
 
 
-interface AboutData {
-  heading: string;
-  subHeading: string;
-  description: string;
-  image: {
-    url: string;
-  };
-}
-
-interface AboutResponse {
-  data: {
-    attributes: AboutData;
-  }[];
-}
 
 const LogoRow: React.FC = () => {
   const [aboutData, setAboutData] = useState<AboutData | null>(null);
